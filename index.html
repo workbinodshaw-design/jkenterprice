@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JK Enterprise | Premium Bamboo Wholesale Supply Across India</title>
+  <meta name="description" content="Premium bamboo wholesale supplier in India. Trusted bamboo supplier from Assam with 10+ years of experience, delivering bulk orders across India via truck and container." />
+  <meta name="keywords" content="bamboo wholesale supplier in India, bamboo supplier from Assam, bamboo poles, treated bamboo, JK Enterprise" />
+  <meta name="author" content="JK Enterprise" />
+  <meta property="og:title" content="JK Enterprise | Premium Bamboo Wholesale Supply Across India" />
+  <meta property="og:description" content="Trusted bamboo supplier from Assam with 10+ years of experience, delivering bulk orders across India via truck and container." />
+  <style>
+    :root {
+      --bg: #08140f;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.14);
+      --panel-border: rgba(255, 255, 255, 0.24);
+      --text: #ecf7f1;
+      --muted: rgba(236, 247, 241, 0.7);
+      --accent: #62e2a0;
+      --accent-2: #21a06a;
+      --sun: #ffd38a;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --transition: 0.35s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f8f6;
+      --panel: rgba(255, 255, 255, 0.75);
+      --panel-strong: rgba(255, 255, 255, 0.9);
+      --panel-border: rgba(20, 66, 45, 0.12);
+      --text: #0d1b13;
+      --muted: rgba(13, 27, 19, 0.7);
+      --accent: #1f9a5b;
+      --accent-2: #0e6a3a;
+      --sun: #ffb85f;
+      --shadow: 0 18px 40px rgba(16, 54, 35, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto; }
+      body { animation: none; opacity: 1; }
+      .nav-menu { transition: none; }
+      .hero .particles { animation: none; }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 20, 15, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(15, 59, 38, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-size: 1.05rem;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--panel-strong);
+      transform: translateY(-1px);
+    }
+
+    .nav-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after { top: 6px; }
+
+    .nav-toggle.active span { background: transparent; }
+    .nav-toggle.active span::before { transform: rotate(45deg); top: 0; }
+    .nav-toggle.active span::after { transform: rotate(-45deg); top: 0; }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-menu a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+
+    .nav-menu a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.6) saturate(1.1);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(5, 12, 9, 0.78), rgba(9, 27, 18, 0.65));
+      z-index: 1;
+    }
+
+    .hero .particles {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(111, 220, 140, 0.2), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(111, 220, 140, 0.12), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(111, 220, 140, 0.18), transparent 45%);
+      animation: float 18s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 20px;
+      max-width: 640px;
+    }
+
+    .tagline {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #04130b;
+      box-shadow: 0 14px 30px rgba(70, 209, 120, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-warm {
+      background: linear-gradient(120deg, var(--sun), #ff9f66);
+      color: #1d1205;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .grid-3 {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .glass:hover {
+      transform: translateY(-6px);
+    }
+
+    .stat {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .gallery {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .gallery img {
+      border-radius: 18px;
+      height: 200px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .testimonials {
+      display: grid;
+      gap: 18px;
+    }
+
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(7, 15, 11, 0.9);
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .floating-actions {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      display: grid;
+      gap: 12px;
+      z-index: 60;
+    }
+
+    .floating-actions a {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .floating-actions a:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      .hero-content { max-width: 520px; }
+      .btn { width: auto; }
+    }
+
+    @media (max-width: 720px) {
+      header { position: sticky; }
+      .nav { align-items: center; }
+      .nav-toggle { display: grid; }
+      .nav-menu {
+        position: absolute;
+        top: 70px;
+        left: 4%;
+        right: 4%;
+        flex-direction: column;
+        gap: 10px;
+        background: var(--panel-strong);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height var(--transition), opacity var(--transition), transform var(--transition);
+      }
+      .nav-menu.open {
+        max-height: 320px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hero { padding: 110px 0 40px; }
+      .hero-content { max-width: 100%; }
+      .btn-row { flex-direction: column; }
+      .btn { width: 100%; text-align: center; }
+      section { padding: 70px 0; }
+      .floating-actions { right: 14px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <div class="container nav">
+      <div class="logo">JK <span>Enterprise</span></div>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="logistics.html">Logistics</a>
+        <a href="enquiry.html">Enquiry</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <video autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1600&q=80">
+      <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-4174/1080p.mp4" type="video/mp4" />
+    </video>
+    <div class="particles"></div>
+    <div class="container hero-content">
+      <div class="tagline">Premium Bamboo Wholesale Supply Across India</div>
+      <h1 id="hero-title">Premium Bamboo Wholesale Supply Across India</h1>
+      <p id="hero-subtitle">Trusted bamboo supplier from Assam with 10+ years of experience, delivering bulk orders across India via truck and container.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="enquiry.html">Book Price Appointment</a>
+        <a class="btn btn-secondary" href="enquiry.html">Send Enquiry</a>
+        <a class="btn btn-warm" href="products.html">View Products</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Why JK Enterprise</h2>
+        <p>Premium bamboo sourcing, reliable logistics, and consistent quality for builders, fabricators, and eco-friendly manufacturers across India.</p>
+      </div>
+      <div class="grid-3">
+        <div class="glass">
+          <div class="stat">10+ Years</div>
+          <p>Decade-long expertise in bamboo harvesting, treatment, and wholesale fulfillment.</p>
+        </div>
+        <div class="glass">
+          <div class="stat">Pan-India</div>
+          <p>Truck & container delivery coverage for metro cities, industrial corridors, and rural projects.</p>
+        </div>
+        <div class="glass">
+          <div class="stat">Assam Source</div>
+          <p>Fresh, sustainable bamboo from Assam forests, carefully sorted for structural strength.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>10+ Years Experience</h2>
+        <p>Trusted by procurement teams for consistent grading, timely dispatch, and transparent communication.</p>
+      </div>
+      <div class="grid-3">
+        <div class="glass">
+          <h3>Quality Treatment</h3>
+          <p>Controlled curing, treatment, and grading for long-lasting bamboo supply.</p>
+        </div>
+        <div class="glass">
+          <h3>Dedicated Logistics</h3>
+          <p>End-to-end dispatch coordination with verified truck and container partners.</p>
+        </div>
+        <div class="glass">
+          <h3>Bulk Order Support</h3>
+          <p>Custom lengths, sorting, and order planning for large-scale operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Pan-India Supply Coverage</h2>
+        <p>Serving corporate buyers across all major industrial corridors with reliable dispatch.</p>
+      </div>
+      <div class="grid-3">
+        <div class="glass">
+          <h3>North & West India</h3>
+          <p>Delhi NCR, Punjab, Rajasthan, Gujarat, Maharashtra with dedicated logistics partners.</p>
+        </div>
+        <div class="glass">
+          <h3>South India</h3>
+          <p>Consistent container deliveries to Karnataka, Tamil Nadu, Telangana, and Kerala.</p>
+        </div>
+        <div class="glass">
+          <h3>East & Northeast</h3>
+          <p>Fast dispatch to West Bengal, Odisha, Bihar, and northeastern states.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Testimonials</h2>
+        <p>Feedback from procurement teams and wholesale buyers who depend on JK Enterprise.</p>
+      </div>
+      <div class="testimonials">
+        <div class="glass">
+          <p>“Reliable bamboo supply with consistent sizing. Their logistics coordination is outstanding.”</p>
+          <strong>— Regional Construction Buyer</strong>
+        </div>
+        <div class="glass">
+          <p>“Quality-treated bamboo delivered on schedule. Perfect for our large infrastructure projects.”</p>
+          <strong>— Procurement Lead, Eco Builders</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Image Gallery</h2>
+        <p>Bamboo plants, warehouse operations, bamboo stockyards, trucks, and containers.</p>
+      </div>
+      <div class="gallery">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?auto=format&fit=crop&w=900&q=80" alt="Bamboo plants" />
+        <img loading="lazy" src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=900&q=80" alt="Bamboo forest" />
+        <img loading="lazy" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80" alt="Bamboo stock" />
+        <img loading="lazy" src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=900&q=80" alt="Warehouse logistics" />
+      </div>
+    </div>
+  </section>
+
+  <section class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>JK Enterprise</h3>
+        <p>Premium Bamboo Wholesale Supply Across India.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Guwahati, Assam, India</p>
+        <p>Phone: +91 9394683474</p>
+        <p>Email: work.binodshaw@gmail.com</p>
+      </div>
+      <div>
+        <h4>Delivery</h4>
+        <p>Pan-India via truck and container with bulk handling expertise.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="floating-actions">
+    <a href="https://wa.me/919394683474?text=Hi%20JK%20Enterprise%2C%20I%20want%20wholesale%20bamboo%20pricing." target="_blank" aria-label="WhatsApp">💬</a>
+    <a href="tel:+919394683474" aria-label="Call">📞</a>
+    <a href="mailto:work.binodshaw@gmail.com" aria-label="Email">✉️</a>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
+    const applyTheme = (theme) => {
+      document.body.setAttribute("data-theme", theme);
+      localStorage.setItem("jk_theme", theme);
+    };
+
+    applyTheme(localStorage.getItem("jk_theme") || "dark");
+
+    themeToggle.addEventListener("click", () => {
+      const next = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+    });
+
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      navToggle.classList.toggle("active");
+      const expanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const storedContent = JSON.parse(localStorage.getItem("jk_content"));
+    if (storedContent) {
+      document.getElementById("hero-title").textContent = storedContent.title;
+      document.getElementById("hero-subtitle").textContent = storedContent.subtitle;
+    }
+  </script>
+</body>
+</html>

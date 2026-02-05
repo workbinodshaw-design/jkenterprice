@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JK Enterprise | About Us</title>
+  <meta name="description" content="Learn about JK Enterprise, a premium bamboo wholesale supplier with 10+ years of experience in Assam." />
+  <meta name="keywords" content="bamboo wholesale supplier in India, bamboo supplier from Assam" />
+  <style>
+    :root {
+      --bg: #08140f;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.14);
+      --panel-border: rgba(255, 255, 255, 0.24);
+      --text: #ecf7f1;
+      --muted: rgba(236, 247, 241, 0.7);
+      --accent: #62e2a0;
+      --accent-2: #21a06a;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --transition: 0.35s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f8f6;
+      --panel: rgba(255, 255, 255, 0.75);
+      --panel-strong: rgba(255, 255, 255, 0.9);
+      --panel-border: rgba(20, 66, 45, 0.12);
+      --text: #0d1b13;
+      --muted: rgba(13, 27, 19, 0.7);
+      --accent: #1f9a5b;
+      --accent-2: #0e6a3a;
+      --shadow: 0 18px 40px rgba(16, 54, 35, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; opacity: 1; }
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 20, 15, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(15, 59, 38, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .logo { font-weight: 700; letter-spacing: 0.5px; }
+    .logo span { color: var(--accent); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .theme-toggle {
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .nav-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after { top: 6px; }
+    .nav-toggle.active span { background: transparent; }
+    .nav-toggle.active span::before { transform: rotate(45deg); top: 0; }
+    .nav-toggle.active span::after { transform: rotate(-45deg); top: 0; }
+
+    .nav-menu { display: flex; align-items: center; gap: 16px; }
+    .nav-menu a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+    .nav-menu a:hover { color: var(--text); background: rgba(255, 255, 255, 0.1); }
+
+    section { padding: 90px 0; }
+
+    .section-title { display: grid; gap: 10px; margin-bottom: 30px; }
+    .section-title p { color: var(--muted); }
+
+    .grid-2 { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition);
+    }
+
+    .glass:hover { transform: translateY(-6px); }
+
+    .floating-actions {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      display: grid;
+      gap: 12px;
+      z-index: 60;
+    }
+
+    .floating-actions a {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 720px) {
+      .nav-toggle { display: grid; }
+      .nav-menu {
+        position: absolute;
+        top: 70px;
+        left: 4%;
+        right: 4%;
+        flex-direction: column;
+        gap: 10px;
+        background: var(--panel-strong);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height var(--transition), opacity var(--transition), transform var(--transition);
+      }
+      .nav-menu.open { max-height: 320px; opacity: 1; transform: translateY(0); }
+      section { padding: 70px 0; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <div class="container nav">
+      <div class="logo">JK <span>Enterprise</span></div>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="logistics.html">Logistics</a>
+        <a href="enquiry.html">Enquiry</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h1>About JK Enterprise</h1>
+        <p>Premium bamboo wholesale supplier headquartered in Guwahati, Assam.</p>
+      </div>
+      <div class="grid-2">
+        <div class="glass">
+          <h3>Company Introduction</h3>
+          <p>JK Enterprise supports construction, furniture, scaffolding, and eco-innovation companies with dependable bamboo supply.</p>
+        </div>
+        <div class="glass">
+          <h3>10+ Years Experience</h3>
+          <p>Decade-long expertise in bamboo sourcing, processing, and nationwide logistics planning.</p>
+        </div>
+        <div class="glass">
+          <h3>Sustainability Focus</h3>
+          <p>We prioritize responsible harvesting, minimal waste, and eco-friendly treatment processes.</p>
+        </div>
+        <div class="glass">
+          <h3>Quality Assurance</h3>
+          <p>Grading, moisture checks, and treatment controls ensure the best quality for bulk orders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="floating-actions">
+    <a href="https://wa.me/919394683474?text=Hi%20JK%20Enterprise%2C%20I%20want%20wholesale%20bamboo%20pricing." target="_blank" aria-label="WhatsApp">💬</a>
+    <a href="tel:+919394683474" aria-label="Call">📞</a>
+    <a href="mailto:work.binodshaw@gmail.com" aria-label="Email">✉️</a>
+  </div>
+
+  <script>
+    const applyTheme = (theme) => {
+      document.body.setAttribute("data-theme", theme);
+      localStorage.setItem("jk_theme", theme);
+    };
+    applyTheme(localStorage.getItem("jk_theme") || "dark");
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const next = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+    });
+
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      navToggle.classList.toggle("active");
+      const expanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>

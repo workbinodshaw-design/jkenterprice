@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JK Enterprise | Admin Panel</title>
+  <meta name="description" content="Admin dashboard for JK Enterprise bamboo wholesale enquiries." />
+  <meta name="keywords" content="bamboo wholesale supplier in India, bamboo supplier from Assam" />
+  <style>
+    :root {
+      --bg: #08140f;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.14);
+      --panel-border: rgba(255, 255, 255, 0.24);
+      --text: #ecf7f1;
+      --muted: rgba(236, 247, 241, 0.7);
+      --accent: #62e2a0;
+      --accent-2: #21a06a;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --transition: 0.35s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f8f6;
+      --panel: rgba(255, 255, 255, 0.75);
+      --panel-strong: rgba(255, 255, 255, 0.9);
+      --panel-border: rgba(20, 66, 45, 0.12);
+      --text: #0d1b13;
+      --muted: rgba(13, 27, 19, 0.7);
+      --accent: #1f9a5b;
+      --accent-2: #0e6a3a;
+      --shadow: 0 18px 40px rgba(16, 54, 35, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; opacity: 1; }
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 20, 15, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(15, 59, 38, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .logo { font-weight: 700; letter-spacing: 0.5px; }
+    .logo span { color: var(--accent); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .theme-toggle {
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .nav-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after { top: 6px; }
+    .nav-toggle.active span { background: transparent; }
+    .nav-toggle.active span::before { transform: rotate(45deg); top: 0; }
+    .nav-toggle.active span::after { transform: rotate(-45deg); top: 0; }
+
+    .nav-menu { display: flex; align-items: center; gap: 16px; }
+    .nav-menu a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+    .nav-menu a:hover { color: var(--text); background: rgba(255, 255, 255, 0.1); }
+
+    section { padding: 80px 0; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    form { display: grid; gap: 12px; }
+
+    .grid-2 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .grid-3 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(7, 16, 12, 0.8);
+      color: var(--text);
+    }
+
+    [data-theme="light"] input,
+    [data-theme="light"] select { background: rgba(255, 255, 255, 0.9); }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .stat { font-size: 2rem; color: var(--accent); font-weight: 700; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+    }
+
+    .floating-actions {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      display: grid;
+      gap: 12px;
+      z-index: 60;
+    }
+
+    .floating-actions a {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 720px) {
+      .nav-toggle { display: grid; }
+      .nav-menu {
+        position: absolute;
+        top: 70px;
+        left: 4%;
+        right: 4%;
+        flex-direction: column;
+        gap: 10px;
+        background: var(--panel-strong);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height var(--transition), opacity var(--transition), transform var(--transition);
+      }
+      .nav-menu.open { max-height: 320px; opacity: 1; transform: translateY(0); }
+      section { padding: 70px 0; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <div class="container nav">
+      <div class="logo">JK <span>Enterprise</span></div>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="logistics.html">Logistics</a>
+        <a href="enquiry.html">Enquiry</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="panel">
+        <h1>Admin Panel</h1>
+        <p style="color: var(--muted);">Username: admin · Password: shawbinod531@gmail.com</p>
+        <form id="admin-login" style="margin-top: 16px;">
+          <div class="grid-2">
+            <div>
+              <label for="admin-username">Username</label>
+              <input id="admin-username" type="text" required />
+            </div>
+            <div>
+              <label for="admin-password">Password</label>
+              <input id="admin-password" type="password" required />
+            </div>
+          </div>
+          <button class="btn" type="submit">Login as Admin</button>
+        </form>
+        <div id="admin-dashboard" style="margin-top: 24px; display: none;">
+          <div class="grid-3">
+            <div class="panel">
+              <div class="stat" id="kpi-total">0</div>
+              <p>Total Enquiries</p>
+            </div>
+            <div class="panel">
+              <div class="stat" id="kpi-today">0</div>
+              <p>Today's Leads</p>
+            </div>
+            <div class="panel">
+              <div class="stat" id="kpi-popular">-</div>
+              <p>Popular Bamboo Type</p>
+            </div>
+          </div>
+          <div class="panel" style="margin-top: 16px;">
+            <h3>City-wise Demand</h3>
+            <div id="kpi-cities"></div>
+          </div>
+          <div class="panel" style="margin-top: 16px;">
+            <h3>Enquiry Management</h3>
+            <div style="overflow-x:auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>City</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-enquiries"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel" style="margin-top: 16px;">
+            <h3>Product Management</h3>
+            <form id="product-form">
+              <div class="grid-2">
+                <div>
+                  <label for="product-name">Product Name</label>
+                  <input id="product-name" type="text" required />
+                </div>
+                <div>
+                  <label for="product-usage">Usage</label>
+                  <input id="product-usage" type="text" required />
+                </div>
+              </div>
+              <div>
+                <label for="product-desc">Description</label>
+                <input id="product-desc" type="text" required />
+              </div>
+              <button class="btn" type="submit">Add Product</button>
+            </form>
+            <div id="admin-products" style="margin-top: 12px;"></div>
+          </div>
+          <div class="panel" style="margin-top: 16px;">
+            <h3>Content Management</h3>
+            <form id="content-form">
+              <div>
+                <label for="content-title">Homepage Title</label>
+                <input id="content-title" type="text" required />
+              </div>
+              <div>
+                <label for="content-subtitle">Homepage Subtitle</label>
+                <input id="content-subtitle" type="text" required />
+              </div>
+              <button class="btn" type="submit">Save Content</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="floating-actions">
+    <a href="https://wa.me/919394683474?text=Hi%20JK%20Enterprise%2C%20I%20want%20wholesale%20bamboo%20pricing." target="_blank" aria-label="WhatsApp">💬</a>
+    <a href="tel:+919394683474" aria-label="Call">📞</a>
+    <a href="mailto:work.binodshaw@gmail.com" aria-label="Email">✉️</a>
+  </div>
+
+  <script>
+    const applyTheme = (theme) => {
+      document.body.setAttribute("data-theme", theme);
+      localStorage.setItem("jk_theme", theme);
+    };
+    applyTheme(localStorage.getItem("jk_theme") || "dark");
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const next = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+    });
+
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      navToggle.classList.toggle("active");
+      const expanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const dashboard = document.getElementById("admin-dashboard");
+    const adminLogin = document.getElementById("admin-login");
+
+    const defaultProducts = [
+      {
+        name: "Raw Bamboo",
+        description: "Freshly harvested bamboo sourced from Assam forests.",
+        usage: "Construction scaffolding, crafts, bulk packaging.",
+        image: "https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "Treated Bamboo",
+        description: "Seasoned and treated for durability and pest resistance.",
+        usage: "Furniture production, structural beams, eco projects.",
+        image: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "Bamboo Poles",
+        description: "Uniform diameter poles for large-scale infrastructure needs.",
+        usage: "Scaffolding, fencing, industrial frameworks.",
+        image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "Bamboo Sticks",
+        description: "Precision cut bamboo sticks for packaging and support.",
+        usage: "Handicrafts, agricultural supports, DIY kits.",
+        image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+      },
+    ];
+
+    const ensureProducts = () => {
+      const stored = JSON.parse(localStorage.getItem("jk_products")) || defaultProducts;
+      localStorage.setItem("jk_products", JSON.stringify(stored));
+      return stored;
+    };
+
+    const renderAdminProducts = (products) => {
+      const container = document.getElementById("admin-products");
+      container.innerHTML = products
+        .map(
+          (product, index) => `
+          <div class="panel" style="margin-top: 10px;">
+            <strong>${product.name}</strong>
+            <p>${product.description}</p>
+            <button class="btn" data-delete="${index}" type="button">Delete</button>
+          </div>
+        `
+        )
+        .join("") || "<p>No products added.</p>";
+    };
+
+    const renderAdminDashboard = () => {
+      const enquiries = JSON.parse(localStorage.getItem("jk_enquiries")) || [];
+      document.getElementById("kpi-total").textContent = enquiries.length;
+      const today = new Date().toDateString();
+      const todayLeads = enquiries.filter((enq) => new Date(enq.createdAt).toDateString() === today);
+      document.getElementById("kpi-today").textContent = todayLeads.length;
+
+      const typeCount = enquiries.reduce((acc, enq) => {
+        acc[enq.type] = (acc[enq.type] || 0) + 1;
+        return acc;
+      }, {});
+      const popular = Object.entries(typeCount).sort((a, b) => b[1] - a[1])[0];
+      document.getElementById("kpi-popular").textContent = popular ? popular[0] : "-";
+
+      const cityCount = enquiries.reduce((acc, enq) => {
+        acc[enq.city] = (acc[enq.city] || 0) + 1;
+        return acc;
+      }, {});
+      document.getElementById("kpi-cities").innerHTML = Object.keys(cityCount)
+        .map((city) => `<p>${city}: ${cityCount[city]}</p>`)
+        .join("") || "<p>No data yet.</p>";
+
+      document.getElementById("admin-enquiries").innerHTML = enquiries
+        .map(
+          (enq, index) => `
+          <tr>
+            <td>${enq.name}</td>
+            <td>${enq.type}</td>
+            <td>${enq.city}</td>
+            <td>
+              <select data-index="${index}" class="status-select">
+                <option ${enq.status === "New" ? "selected" : ""}>New</option>
+                <option ${enq.status === "Contacted" ? "selected" : ""}>Contacted</option>
+                <option ${enq.status === "Closed" ? "selected" : ""}>Closed</option>
+              </select>
+            </td>
+          </tr>
+        `
+        )
+        .join("");
+    };
+
+    adminLogin.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const username = document.getElementById("admin-username").value.trim();
+      const password = document.getElementById("admin-password").value.trim();
+      if (username === "admin" && password === "shawbinod531@gmail.com") {
+        localStorage.setItem("jk_admin_logged", "true");
+        dashboard.style.display = "block";
+        renderAdminDashboard();
+        renderAdminProducts(ensureProducts());
+      } else {
+        alert("Invalid admin credentials.");
+      }
+    });
+
+    document.getElementById("product-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const products = ensureProducts();
+      products.push({
+        name: document.getElementById("product-name").value.trim(),
+        usage: document.getElementById("product-usage").value.trim(),
+        description: document.getElementById("product-desc").value.trim(),
+        image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80",
+      });
+      localStorage.setItem("jk_products", JSON.stringify(products));
+      renderAdminProducts(products);
+      event.target.reset();
+    });
+
+    document.getElementById("admin-products").addEventListener("click", (event) => {
+      const index = event.target.getAttribute("data-delete");
+      if (index === null) return;
+      const products = ensureProducts();
+      products.splice(Number(index), 1);
+      localStorage.setItem("jk_products", JSON.stringify(products));
+      renderAdminProducts(products);
+    });
+
+    document.getElementById("content-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const content = {
+        title: document.getElementById("content-title").value.trim(),
+        subtitle: document.getElementById("content-subtitle").value.trim(),
+      };
+      localStorage.setItem("jk_content", JSON.stringify(content));
+      alert("Homepage content updated.");
+    });
+
+    document.addEventListener("change", (event) => {
+      if (!event.target.classList.contains("status-select")) return;
+      const index = Number(event.target.dataset.index);
+      const enquiries = JSON.parse(localStorage.getItem("jk_enquiries")) || [];
+      if (!enquiries[index]) return;
+      enquiries[index].status = event.target.value;
+      localStorage.setItem("jk_enquiries", JSON.stringify(enquiries));
+      renderAdminDashboard();
+    });
+
+    const storedContent = JSON.parse(localStorage.getItem("jk_content"));
+    document.getElementById("content-title").value = storedContent?.title || "Premium Bamboo Wholesale Supply Across India";
+    document.getElementById("content-subtitle").value = storedContent?.subtitle || "Trusted bamboo supplier from Assam with 10+ years of experience, delivering bulk orders across India via truck and container.";
+
+    if (localStorage.getItem("jk_admin_logged") === "true") {
+      dashboard.style.display = "block";
+      renderAdminDashboard();
+      renderAdminProducts(ensureProducts());
+    }
+  </script>
+</body>
+</html>

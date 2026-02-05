@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JK Enterprise | Customer Login</title>
+  <meta name="description" content="Customer signup and login for JK Enterprise bamboo wholesale enquiries." />
+  <meta name="keywords" content="bamboo wholesale supplier in India, bamboo supplier from Assam" />
+  <style>
+    :root {
+      --bg: #08140f;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.14);
+      --panel-border: rgba(255, 255, 255, 0.24);
+      --text: #ecf7f1;
+      --muted: rgba(236, 247, 241, 0.7);
+      --accent: #62e2a0;
+      --accent-2: #21a06a;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --transition: 0.35s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f8f6;
+      --panel: rgba(255, 255, 255, 0.75);
+      --panel-strong: rgba(255, 255, 255, 0.9);
+      --panel-border: rgba(20, 66, 45, 0.12);
+      --text: #0d1b13;
+      --muted: rgba(13, 27, 19, 0.7);
+      --accent: #1f9a5b;
+      --accent-2: #0e6a3a;
+      --shadow: 0 18px 40px rgba(16, 54, 35, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; opacity: 1; }
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(980px, 92%); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 20, 15, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(15, 59, 38, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .logo { font-weight: 700; letter-spacing: 0.5px; }
+    .logo span { color: var(--accent); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .theme-toggle {
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .nav-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-toggle span::before { top: -6px; }
+    .nav-toggle span::after { top: 6px; }
+    .nav-toggle.active span { background: transparent; }
+    .nav-toggle.active span::before { transform: rotate(45deg); top: 0; }
+    .nav-toggle.active span::after { transform: rotate(-45deg); top: 0; }
+
+    .nav-menu { display: flex; align-items: center; gap: 16px; }
+    .nav-menu a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+    .nav-menu a:hover { color: var(--text); background: rgba(255, 255, 255, 0.1); }
+
+    section { padding: 80px 0; }
+
+    .grid-2 { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    form { display: grid; gap: 14px; }
+
+    label { font-size: 0.9rem; color: var(--muted); }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(7, 16, 12, 0.8);
+      color: var(--text);
+    }
+
+    [data-theme="light"] input { background: rgba(255, 255, 255, 0.9); }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #04130b;
+    }
+
+    .btn-secondary {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(98, 226, 160, 0.2);
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .history { display: grid; gap: 12px; margin-top: 14px; }
+
+    .history-card {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--panel-border);
+      background: rgba(7, 16, 12, 0.6);
+    }
+
+    .floating-actions {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      display: grid;
+      gap: 12px;
+      z-index: 60;
+    }
+
+    .floating-actions a {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 720px) {
+      .nav-toggle { display: grid; }
+      .nav-menu {
+        position: absolute;
+        top: 70px;
+        left: 4%;
+        right: 4%;
+        flex-direction: column;
+        gap: 10px;
+        background: var(--panel-strong);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: max-height var(--transition), opacity var(--transition), transform var(--transition);
+      }
+      .nav-menu.open { max-height: 320px; opacity: 1; transform: translateY(0); }
+      section { padding: 70px 0; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <div class="container nav">
+      <div class="logo">JK <span>Enterprise</span></div>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="logistics.html">Logistics</a>
+        <a href="enquiry.html">Enquiry</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="grid-2">
+        <div class="panel">
+          <h2>Signup</h2>
+          <form id="signup-form">
+            <div>
+              <label for="signup-name">Name</label>
+              <input id="signup-name" name="name" type="text" required />
+            </div>
+            <div>
+              <label for="signup-phone">Phone</label>
+              <input id="signup-phone" name="phone" type="tel" required />
+            </div>
+            <div>
+              <label for="signup-email">Email</label>
+              <input id="signup-email" name="email" type="email" required />
+            </div>
+            <div>
+              <label for="signup-password">Password</label>
+              <input id="signup-password" name="password" type="password" required />
+            </div>
+            <button class="btn btn-primary" type="submit">Create Account</button>
+          </form>
+        </div>
+        <div class="panel">
+          <h2>Login</h2>
+          <form id="login-form">
+            <div>
+              <label for="login-email">Email</label>
+              <input id="login-email" name="email" type="email" required />
+            </div>
+            <div>
+              <label for="login-password">Password</label>
+              <input id="login-password" name="password" type="password" required />
+            </div>
+            <button class="btn btn-secondary" type="submit">Login</button>
+          </form>
+          <div id="user-panel" style="margin-top: 16px; display: none;">
+            <div class="badge">Logged in</div>
+            <h4 style="margin-top: 12px;">Your Enquiry History</h4>
+            <div class="history" id="user-enquiries"></div>
+            <button class="btn btn-secondary" id="logout-btn" style="margin-top: 12px;">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="floating-actions">
+    <a href="https://wa.me/919394683474?text=Hi%20JK%20Enterprise%2C%20I%20want%20wholesale%20bamboo%20pricing." target="_blank" aria-label="WhatsApp">💬</a>
+    <a href="tel:+919394683474" aria-label="Call">📞</a>
+    <a href="mailto:work.binodshaw@gmail.com" aria-label="Email">✉️</a>
+  </div>
+
+  <script>
+    const applyTheme = (theme) => {
+      document.body.setAttribute("data-theme", theme);
+      localStorage.setItem("jk_theme", theme);
+    };
+    applyTheme(localStorage.getItem("jk_theme") || "dark");
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const next = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+    });
+
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    navToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+      navToggle.classList.toggle("active");
+      const expanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const signupForm = document.getElementById("signup-form");
+    const loginForm = document.getElementById("login-form");
+    const userPanel = document.getElementById("user-panel");
+    const userEnquiries = document.getElementById("user-enquiries");
+
+    const phoneRegex = /^[0-9+\-\s]{7,15}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const renderUserEnquiries = () => {
+      const currentUser = JSON.parse(localStorage.getItem("jk_current_user"));
+      if (!currentUser) {
+        userPanel.style.display = "none";
+        return;
+      }
+      const enquiries = JSON.parse(localStorage.getItem("jk_enquiries")) || [];
+      const userEntries = enquiries.filter((enq) => enq.email === currentUser.email);
+      userPanel.style.display = "block";
+      userEnquiries.innerHTML = userEntries.length
+        ? userEntries
+            .map(
+              (enq) => `
+              <div class="history-card">
+                <strong>${enq.type}</strong>
+                <p>${enq.quantity} · ${enq.delivery}</p>
+                <span class="badge">${enq.status}</span>
+              </div>
+            `
+            )
+            .join("")
+        : "<p>No enquiries submitted yet.</p>";
+    };
+
+    signupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!phoneRegex.test(signupForm.phone.value.trim())) {
+        alert("Please enter a valid phone number.");
+        return;
+      }
+      if (!emailRegex.test(signupForm.email.value.trim())) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      const users = JSON.parse(localStorage.getItem("jk_users")) || [];
+      const email = signupForm.email.value.trim();
+      if (users.find((user) => user.email === email)) {
+        alert("Account already exists.");
+        return;
+      }
+      users.push({
+        name: signupForm.name.value.trim(),
+        phone: signupForm.phone.value.trim(),
+        email,
+        password: signupForm.password.value,
+      });
+      localStorage.setItem("jk_users", JSON.stringify(users));
+      alert("Signup successful. Please login.");
+      signupForm.reset();
+    });
+
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const users = JSON.parse(localStorage.getItem("jk_users")) || [];
+      const email = loginForm.email.value.trim();
+      const password = loginForm.password.value;
+      const found = users.find((user) => user.email === email && user.password === password);
+      if (!found) {
+        alert("Invalid credentials.");
+        return;
+      }
+      localStorage.setItem("jk_current_user", JSON.stringify(found));
+      renderUserEnquiries();
+      loginForm.reset();
+    });
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("jk_current_user");
+      renderUserEnquiries();
+    });
+
+    renderUserEnquiries();
+  </script>
+</body>
+</html>
