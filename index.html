@@ -11,88 +11,107 @@
   <meta property="og:description" content="Trusted bamboo supplier from Assam with 10+ years of experience, delivering bulk orders across India via truck and container." />
   <style>
     :root {
-      --bg: #08140f;
+      --bg: #07130f;
+      --bg-2: #0d1f18;
       --panel: rgba(255, 255, 255, 0.08);
-      --panel-strong: rgba(255, 255, 255, 0.14);
-      --panel-border: rgba(255, 255, 255, 0.24);
+      --panel-strong: rgba(255, 255, 255, 0.16);
+      --panel-border: rgba(255, 255, 255, 0.22);
       --text: #ecf7f1;
       --muted: rgba(236, 247, 241, 0.7);
       --accent: #62e2a0;
       --accent-2: #21a06a;
       --sun: #ffd38a;
-      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      --shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
       --radius: 22px;
       --transition: 0.35s ease;
     }
 
     [data-theme="light"] {
-      --bg: #f4f8f6;
+      --bg: #f6faf7;
+      --bg-2: #edf7f0;
       --panel: rgba(255, 255, 255, 0.75);
       --panel-strong: rgba(255, 255, 255, 0.9);
-      --panel-border: rgba(20, 66, 45, 0.12);
+      --panel-border: rgba(35, 96, 66, 0.12);
       --text: #0d1b13;
       --muted: rgba(13, 27, 19, 0.7);
       --accent: #1f9a5b;
       --accent-2: #0e6a3a;
       --sun: #ffb85f;
-      --shadow: 0 18px 40px rgba(16, 54, 35, 0.16);
+      --shadow: 0 14px 30px rgba(16, 54, 35, 0.12);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
       scroll-behavior: smooth;
     }
 
     body {
-      background: var(--bg);
+      background: radial-gradient(circle at top, var(--bg-2), var(--bg));
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
-      transition: background var(--transition), color var(--transition);
+      transition: background var(--transition), color var(--transition), filter var(--transition);
       opacity: 0;
-      animation: fadeIn 0.6s ease forwards;
+      animation: pageIn 0.55s ease forwards;
+      -webkit-overflow-scrolling: touch;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(98, 226, 160, 0.08), rgba(255, 211, 138, 0.05));
+      opacity: 0.7;
+      animation: gradientMove 18s ease-in-out infinite;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes pageIn {
+      to { opacity: 1; transform: scale(1); }
     }
 
     @media (prefers-reduced-motion: reduce) {
       * { scroll-behavior: auto; }
       body { animation: none; opacity: 1; }
-      .nav-menu { transition: none; }
+      body::before { animation: none; }
+      .reveal { transition: none; }
       .hero .particles { animation: none; }
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(1200px, 92%);
-      margin: 0 auto;
-    }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
 
     header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(10, 20, 15, 0.72);
+      background: rgba(10, 20, 15, 0.7);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     [data-theme="light"] header {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       border-bottom: 1px solid rgba(15, 59, 38, 0.1);
     }
 
@@ -104,21 +123,10 @@
       padding: 14px 0;
     }
 
-    .logo {
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      font-size: 1.05rem;
-    }
+    .logo { font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; }
+    .logo span { color: var(--accent); }
 
-    .logo span {
-      color: var(--accent);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
 
     .theme-toggle {
       border: 1px solid var(--panel-border);
@@ -132,10 +140,7 @@
       transition: var(--transition);
     }
 
-    .theme-toggle:hover {
-      background: var(--panel-strong);
-      transform: translateY(-1px);
-    }
+    .theme-toggle:active { transform: scale(0.98); }
 
     .nav-toggle {
       width: 44px;
@@ -171,17 +176,11 @@
 
     .nav-toggle span::before { top: -6px; }
     .nav-toggle span::after { top: 6px; }
-
     .nav-toggle.active span { background: transparent; }
     .nav-toggle.active span::before { transform: rotate(45deg); top: 0; }
     .nav-toggle.active span::after { transform: rotate(-45deg); top: 0; }
 
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
+    .nav-menu { display: flex; align-items: center; gap: 16px; }
     .nav-menu a {
       color: var(--muted);
       font-size: 0.95rem;
@@ -189,11 +188,7 @@
       border-radius: 999px;
       transition: var(--transition);
     }
-
-    .nav-menu a:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.1);
-    }
+    .nav-menu a:hover { color: var(--text); background: rgba(255, 255, 255, 0.1); }
 
     .hero {
       position: relative;
@@ -211,6 +206,8 @@
       object-fit: cover;
       z-index: 0;
       filter: brightness(0.6) saturate(1.1);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
     }
 
     .hero::after {
@@ -256,16 +253,9 @@
       line-height: 1.1;
     }
 
-    .hero p {
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
+    .hero p { color: var(--muted); font-size: 1.05rem; }
 
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
     .btn {
       padding: 12px 22px;
@@ -274,12 +264,13 @@
       border: 1px solid transparent;
       cursor: pointer;
       transition: var(--transition);
+      transform: translateZ(0);
     }
 
     .btn-primary {
       background: linear-gradient(120deg, var(--accent), var(--accent-2));
       color: #04130b;
-      box-shadow: 0 14px 30px rgba(70, 209, 120, 0.35);
+      box-shadow: 0 10px 24px rgba(70, 209, 120, 0.25);
     }
 
     .btn-secondary {
@@ -294,31 +285,14 @@
       color: #1d1205;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
+    .btn:active { transform: scale(0.98); }
 
-    section {
-      padding: 90px 0;
-    }
+    section { padding: 90px 0; }
 
-    .section-title {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 32px;
-    }
+    .section-title { display: grid; gap: 10px; margin-bottom: 32px; }
+    .section-title p { color: var(--muted); max-width: 640px; }
 
-    .section-title p {
-      color: var(--muted);
-      max-width: 640px;
-    }
-
-    .grid-3 {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
+    .grid-3 { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 
     .glass {
       background: var(--panel);
@@ -328,35 +302,17 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
       transition: transform var(--transition), box-shadow var(--transition);
+      will-change: transform, opacity;
     }
 
-    .glass:hover {
-      transform: translateY(-6px);
-    }
+    .glass:hover { transform: translateY(-6px); }
 
-    .stat {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
+    .stat { font-size: 2.1rem; font-weight: 700; color: var(--accent); }
 
-    .gallery {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
+    .gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .gallery img { border-radius: 18px; height: 200px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.12); }
 
-    .gallery img {
-      border-radius: 18px;
-      height: 200px;
-      object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .testimonials {
-      display: grid;
-      gap: 18px;
-    }
+    .testimonials { display: grid; gap: 18px; }
 
     .footer {
       padding: 40px 0;
@@ -364,11 +320,7 @@
       background: rgba(7, 15, 11, 0.9);
     }
 
-    .footer-grid {
-      display: grid;
-      gap: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
+    .footer-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 
     .floating-actions {
       position: fixed;
@@ -393,18 +345,22 @@
       transition: var(--transition);
     }
 
-    .floating-actions a:hover {
-      transform: translateY(-2px);
+    .floating-actions a:active { transform: scale(0.97); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: transform, opacity;
     }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
       .hero-content { max-width: 520px; }
-      .btn { width: auto; }
     }
 
     @media (max-width: 720px) {
-      header { position: sticky; }
-      .nav { align-items: center; }
       .nav-toggle { display: grid; }
       .nav-menu {
         position: absolute;
@@ -425,11 +381,7 @@
         transform: translateY(-10px);
         transition: max-height var(--transition), opacity var(--transition), transform var(--transition);
       }
-      .nav-menu.open {
-        max-height: 320px;
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .nav-menu.open { max-height: 320px; opacity: 1; transform: translateY(0); }
       .hero { padding: 110px 0 40px; }
       .hero-content { max-width: 100%; }
       .btn-row { flex-direction: column; }
@@ -454,16 +406,14 @@
       </nav>
       <div class="nav-actions">
         <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-          <span></span>
-        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
       </div>
     </div>
   </header>
 
   <section class="hero" id="home">
-    <video autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1600&q=80">
-      <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-4174/1080p.mp4" type="video/mp4" />
+    <video autoplay muted loop playsinline preload="metadata" id="hero-video" poster="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1600&q=80">
+      <source id="hero-video-source" src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-4174/1080p.mp4" type="video/mp4" />
     </video>
     <div class="particles"></div>
     <div class="container hero-content">
@@ -479,9 +429,9 @@
   </section>
 
   <section>
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
-        <h2>Why JK Enterprise</h2>
+        <h2 id="title-why">Why JK Enterprise</h2>
         <p>Premium bamboo sourcing, reliable logistics, and consistent quality for builders, fabricators, and eco-friendly manufacturers across India.</p>
       </div>
       <div class="grid-3">
@@ -502,9 +452,9 @@
   </section>
 
   <section>
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
-        <h2>10+ Years Experience</h2>
+        <h2 id="title-experience">10+ Years Experience</h2>
         <p>Trusted by procurement teams for consistent grading, timely dispatch, and transparent communication.</p>
       </div>
       <div class="grid-3">
@@ -525,9 +475,9 @@
   </section>
 
   <section>
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
-        <h2>Pan-India Supply Coverage</h2>
+        <h2 id="title-coverage">Pan-India Supply Coverage</h2>
         <p>Serving corporate buyers across all major industrial corridors with reliable dispatch.</p>
       </div>
       <div class="grid-3">
@@ -548,36 +498,22 @@
   </section>
 
   <section>
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
-        <h2>Testimonials</h2>
+        <h2 id="title-testimonials">Testimonials</h2>
         <p>Feedback from procurement teams and wholesale buyers who depend on JK Enterprise.</p>
       </div>
-      <div class="testimonials">
-        <div class="glass">
-          <p>“Reliable bamboo supply with consistent sizing. Their logistics coordination is outstanding.”</p>
-          <strong>— Regional Construction Buyer</strong>
-        </div>
-        <div class="glass">
-          <p>“Quality-treated bamboo delivered on schedule. Perfect for our large infrastructure projects.”</p>
-          <strong>— Procurement Lead, Eco Builders</strong>
-        </div>
-      </div>
+      <div class="testimonials" id="testimonial-list"></div>
     </div>
   </section>
 
   <section>
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
-        <h2>Image Gallery</h2>
+        <h2 id="title-gallery">Image Gallery</h2>
         <p>Bamboo plants, warehouse operations, bamboo stockyards, trucks, and containers.</p>
       </div>
-      <div class="gallery">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?auto=format&fit=crop&w=900&q=80" alt="Bamboo plants" />
-        <img loading="lazy" src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=900&q=80" alt="Bamboo forest" />
-        <img loading="lazy" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80" alt="Bamboo stock" />
-        <img loading="lazy" src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=900&q=80" alt="Warehouse logistics" />
-      </div>
+      <div class="gallery" id="gallery-grid"></div>
     </div>
   </section>
 
@@ -619,8 +555,12 @@
     applyTheme(localStorage.getItem("jk_theme") || "dark");
 
     themeToggle.addEventListener("click", () => {
+      document.body.style.filter = "blur(1px)";
       const next = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next);
+      setTimeout(() => {
+        applyTheme(next);
+        document.body.style.filter = "none";
+      }, 150);
     });
 
     navToggle.addEventListener("click", () => {
@@ -640,9 +580,77 @@
 
     const storedContent = JSON.parse(localStorage.getItem("jk_content"));
     if (storedContent) {
-      document.getElementById("hero-title").textContent = storedContent.title;
-      document.getElementById("hero-subtitle").textContent = storedContent.subtitle;
+      document.getElementById("hero-title").textContent = storedContent.title || document.getElementById("hero-title").textContent;
+      document.getElementById("hero-subtitle").textContent = storedContent.subtitle || document.getElementById("hero-subtitle").textContent;
+      if (storedContent.video) {
+        document.getElementById("hero-video-source").src = storedContent.video;
+        document.getElementById("hero-video").load();
+      }
+      if (storedContent.poster) {
+        document.getElementById("hero-video").setAttribute("poster", storedContent.poster);
+      }
     }
+
+    const defaultGallery = [
+      "https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=900&q=80",
+    ];
+
+    const galleryImages = JSON.parse(localStorage.getItem("jk_gallery")) || defaultGallery;
+    const galleryGrid = document.getElementById("gallery-grid");
+    galleryGrid.innerHTML = galleryImages
+      .map((src) => `<img loading="lazy" src="${src}" alt="JK Enterprise gallery" />`)
+      .join("");
+
+    const defaultTestimonials = [
+      { quote: "Reliable bamboo supply with consistent sizing. Their logistics coordination is outstanding.", name: "Regional Construction Buyer" },
+      { quote: "Quality-treated bamboo delivered on schedule. Perfect for our large infrastructure projects.", name: "Procurement Lead, Eco Builders" },
+    ];
+
+    const testimonials = JSON.parse(localStorage.getItem("jk_testimonials")) || defaultTestimonials;
+    const testimonialList = document.getElementById("testimonial-list");
+    testimonialList.innerHTML = testimonials
+      .map((item) => `<div class="glass"><p>“${item.quote}”</p><strong>— ${item.name}</strong></div>`)
+      .join("");
+
+    const sectionTitles = JSON.parse(localStorage.getItem("jk_sections"));
+    if (sectionTitles) {
+      if (sectionTitles.why) document.getElementById("title-why").textContent = sectionTitles.why;
+      if (sectionTitles.experience) document.getElementById("title-experience").textContent = sectionTitles.experience;
+      if (sectionTitles.coverage) document.getElementById("title-coverage").textContent = sectionTitles.coverage;
+      if (sectionTitles.testimonials) document.getElementById("title-testimonials").textContent = sectionTitles.testimonials;
+      if (sectionTitles.gallery) document.getElementById("title-gallery").textContent = sectionTitles.gallery;
+    }
+
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealElements.forEach((el) => observer.observe(el));
+
+    const heroVideo = document.getElementById("hero-video");
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const offset = window.scrollY * 0.08;
+          heroVideo.style.transform = `translate3d(0, ${offset}px, 0)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
   </script>
 </body>
 </html>
